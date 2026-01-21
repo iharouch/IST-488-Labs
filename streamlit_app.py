@@ -1,6 +1,14 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+create_page = st.Page("create.py", title = "Create entry", icon:":material/add_circle:")
+delete_page = st.Page("delete.py", title = "Delete entry", icon:":material/delete:")
+
+pg = st.navigation([create_page, delete_page])
+st.set_page_config(
+   # Set page title
+   page_title = "Lab App", 
+   layout = "wide",
+   initial_sidebar_state = "expanded",
+   page_icon=":material/edit:"
 )
+pg.run()
