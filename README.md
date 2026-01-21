@@ -1,19 +1,14 @@
-# 🎈 Blank app template
+import streamlit as st
 
-A simple Streamlit app template for you to modify!
+create_page = st.Page("create.py", title = "Create entry", icon:":material/add_circle:")
+delete_page = st.Page("delete.py", title = "Delete entry", icon:":material/delete:")
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
-
-### How to run it on your own machine
-
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+pg = st.navigation([create_page, delete_page])
+st.set_page_config(
+   # Set page title
+   page_title = "Lab App", 
+   layout = "wide",
+   initial_sidebar_state = "expanded",
+   page_icon=":material/edit:"
+)
+pg.run()
