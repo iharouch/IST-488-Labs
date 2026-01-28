@@ -20,6 +20,18 @@ uploaded_file = st.file_uploader(
     "Upload a document (.txt or .md)", type=("txt", "md")
 )
 
+# Provide user with options for model selection
+use_advanced_model = st.sidebar.checkbox("Use advanced model (gpt-5.2)", value=False)
+
+if use_advanced_model:
+    model_option = 'gpt-5.2'
+else:
+    model_option = st.sidebar.selectbox("Choose a model:", [
+        'gpt-4.1',
+        'gpt-5-mini',
+        'gpt-5.2'
+    ], index=0)
+
 # Provide user with three options for generating a summary
 summary_option = st.sidebar.radio("Choose a summary type:", [
     'Summarize the document in 100 words',
@@ -40,7 +52,7 @@ if st.sidebar.button("Generate Summary", disabled=not uploaded_file):
 
         # Generate an answer using the OpenAI API.
         stream = client.chat.completions.create(
-            model="gpt-5-mini",
+            model=model_option,
             messages=messages,
             stream=True,
         )
