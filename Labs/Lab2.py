@@ -31,7 +31,7 @@ else:
         'gpt-5-nano',
         'gpt-4.1',
         'gpt-5.2'
-    ], index=0) # Selectbox for model choice if not automatically using advanced model with 4.1 as default
+    ], index=0) # Selectbox for model choice if not automatically using advanced model as default
 
 # Provide user with three options for generating a summary
 summary_option = st.sidebar.radio("Choose a summary type:", [
