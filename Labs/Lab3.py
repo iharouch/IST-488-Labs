@@ -1,8 +1,8 @@
 import streamlit as st
 from openai import OpenAI
 
-"""def keep_last_n_user_messages(messages, n=2):
-    Keep only the last n user messages and their responses.
+def keep_last_n_user_messages(messages, n=2):
+    #Keep only the last n user messages and their responses.
     user_message_indices = [i for i, msg in enumerate(messages) if msg["role"] == "user"]
     
     if len(user_message_indices) <= n:
@@ -13,7 +13,7 @@ from openai import OpenAI
     start_index = user_message_indices[-n]
     
     # Return the system message (if exists) plus messages from that point onward
-    return messages[start_index:]"""
+    return messages[start_index:]
 
 #Show title and description
 st.title("MY Lab3 question answering chatbot")
@@ -47,10 +47,10 @@ if prompt := st.chat_input("What do you need help with?"):
         st.markdown(prompt)
 
     client = st.session_state.client
-    #messages_to_send = keep_last_n_user_messages(st.session_state.messages, n=2)
+    messages_to_send = keep_last_n_user_messages(st.session_state.messages, n=2)
     stream = client.chat.completions.create(
         model = model,
-        messages = st.session_state.messages,
+        messages = messages_to_send,
         stream = True
     )
 
