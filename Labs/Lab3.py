@@ -1,19 +1,27 @@
 import streamlit as st
 from openai import OpenAI
 
+# System prompt to guide bot behavior
+SYSTEM_PROMPT = """You are a helpful Q&A chatbot. Follow these rules:
+1. When answering a new question, provide a clear, concise answer
+2. After answering, ask: "Do you want more info?"
+3. If the user says "Yes", provide additional detailed information and ask again: "Do you want more info?"
+4. If the user says "No", respond with "How can I help you with something else?" and be ready for a new question
+Keep responses focused and helpful."""
+
 def keep_last_n_user_messages(messages, n=2):
     #Keep only the last n user messages and their responses.
     user_message_indices = [i for i, msg in enumerate(messages) if msg["role"] == "user"]
     
     if len(user_message_indices) <= n:
-        # Keep the initial assistant message + all user messages and responses
+        # Keep system prompt + all user messages and responses
         return messages
     
     # Find the index of the (n)th most recent user message
     start_index = user_message_indices[-n]
     
-    # Return the system message (if exists) plus messages from that point onward
-    return messages[start_index:]
+    # Return system prompt (index 0) plus messages from that point onward
+    return [messages[0]] + messages[start_index:]
 
 #Show title and description
 st.title("MY Lab3 question answering chatbot")
@@ -30,28 +38,31 @@ if 'client' not in st.session_state:
     api_key = st.secrets["OPENAI_API_KEY"]
     st.session_state.client = OpenAI(api_key=api_key)
 
+# Initialize messages with system prompt (protected from removal)
 if 'messages' not in st.session_state:
-    st.session_state['messages'] = \
-        [{"role": "assistant", "content": "How can I help you?"}]
-    
-for msg in st.session_state.messages:
-    #st.chat_message(msg["role"]).write(msg["content"])
-    #with st.chat_message(msg["role"]):
-    #    st.write(msg["content"])
+    st.session_state['messages'] = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "assistant", "content": "How can I help you?"}
+    ]
+
+# Display chat history (skip system prompt)
+for msg in st.session_state.messages[1:]:
     chat_msg = st.chat_message(msg["role"])
     chat_msg.write(msg["content"])
 
+# Get user input
 if prompt := st.chat_input("What do you need help with?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     client = st.session_state.client
+    # Apply buffer while also using system prompt
     messages_to_send = keep_last_n_user_messages(st.session_state.messages, n=2)
     stream = client.chat.completions.create(
-        model = model,
-        messages = messages_to_send,
-        stream = True
+        model=model,
+        messages=messages_to_send,
+        stream=True
     )
 
     with st.chat_message("assistant"):
