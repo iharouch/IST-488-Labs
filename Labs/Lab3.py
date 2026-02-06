@@ -2,15 +2,16 @@ import streamlit as st
 from openai import OpenAI
 
 # System prompt to guide bot behavior
-SYSTEM_PROMPT = """You are a helpful Q&A chatbot. Follow these rules:
-1. When answering a new question, provide a clear, concise answer
-2. After answering, ask: "Do you want more info?"
-3. If the user says "Yes", provide additional detailed information and ask again: "Do you want more info?"
-4. If the user says "No", respond with "How can I help you with something else?" and be ready for a new question
+SYSTEM_PROMPT = """You are a helpful Q&A chatbot. Follow these rules STRICTLY:
+1. When answering a NEW QUESTION, provide a clear, concise answer
+2. ALWAYS end your answer with: "Do you want more info?"
+3. If the user says "Yes" or "yes", provide additional detailed information and ALWAYS end with: "Do you want more info?"
+4. If the user says "No" or "no", respond with: "How can I help you with something else?"
 Keep responses focused and helpful."""
 
 def keep_last_n_user_messages(messages, n=2):
-    #Keep only the last n user messages and their responses.
+    """Keep only the last n user messages and their responses, while preserving system prompt"""
+    # Find user message indices (skip system prompt at index 0)
     user_message_indices = [i for i, msg in enumerate(messages) if msg["role"] == "user"]
     
     if len(user_message_indices) <= n:
