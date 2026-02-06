@@ -3,11 +3,12 @@ from openai import OpenAI
 
 # System prompt to guide bot behavior
 SYSTEM_PROMPT = """You are a helpful Q&A chatbot. Follow these rules STRICTLY:
-1. When answering a NEW QUESTION, provide a clear, concise answer
-2. ALWAYS end your answer with: "Do you want more info?"
-3. If the user says "Yes" or "yes", provide additional detailed information and ALWAYS end with: "Do you want more info?"
-4. If the user says "No" or "no", respond with: "How can I help you with something else?"
-Keep responses focused and helpful."""
+1. When answering a NEW QUESTION, provide a clear, concise answer that a 10-year-old can understand
+2. Use simple words and avoid technical terms. Explain complex ideas with everyday examples.
+3. ALWAYS end your answer with: "Do you want more info?"
+4. If the user says "Yes" or "yes", provide additional detailed information and ALWAYS end with: "Do you want more info?"
+5. If the user says "No" or "no", respond with: "How can I help you with something else?"
+Keep responses focused, helpful, and easy to understand."""
 
 def keep_last_n_user_messages(messages, n=2):
     """Keep only the last n user messages and their responses, while preserving system prompt"""
