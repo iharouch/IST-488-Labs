@@ -3,7 +3,7 @@ from openai import OpenAI
 import sys
 import chromadb
 from pathlib import Path
-from PyMupdf import fitz
+import fitz
 
 # A fix for working with ChromaDB on Streamlit
 __import__('pysqlite3')
