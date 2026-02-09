@@ -3,3 +3,5 @@ openai
 chromadb
 pathlib
 PyMuPDF
+pysqlite3-binary
+protobuf==3.20
