@@ -79,7 +79,7 @@ topic = st.sidebar.text_input("Topic", placeholder="Type your topic (e.g. GenAI)
 
 if topic:
     client = st.session_state.client
-    response = client.embeddings.creat(
+    response = client.embeddings.create(
         input = topic,
         model = "text-embedding-3-small"
     )
