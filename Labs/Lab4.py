@@ -145,9 +145,10 @@ if prompt := st.chat_input("What do you need help with?"):
         n_results=3 #The number of closest documents to return
     )
 
-    doc = results['documents'][0][i]
-    doc_id = results['ids'][0][i]
-    
+    for i in range(len(results['documents'][0])):
+        doc = results['documents'][0][i]
+        doc_id = results['ids'][0][i]
+
     #Build RAG context
     rag_context = "\n\n".join(
     f"Source: {doc_id}\n{doc}" # Include source in context to know which PDF it is
