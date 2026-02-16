@@ -2,9 +2,6 @@ import requests
 import streamlit as st
 
 def get_current_weather(location, api_key, units="imperial"):
-    location = st.text_input("Enter a location (City, State, Country):") # Input for user to enter location
-    api_key = st.secrets["WEATHER_API_KEY"] # Get API key from secrets.toml file
-    
     url = (
         f'https://api.openweathermap.org/data/2.5/weather'
         f'?q={location}&appid={api_key}&units={units}'
@@ -31,8 +28,14 @@ def get_current_weather(location, api_key, units="imperial"):
             'temp_max': round(temp_max, 2),
             'humidity': round(humidity, 2)}
 
-if __name__ == "__main__":
+st.title("What to Wear Bot")
+
+location = st.text_input("Enter a location (City, State, Country):") # Input for user to enter location
+api_key = st.secrets["WEATHER_API_KEY"] # Get API key from secrets.toml file
+
+if location:
     weather = get_current_weather(location, api_key)
+    
     st.write(f"Current weather in {weather['location']}:")
     st.write(f"Temperature: {weather['temperature']}°F")
     st.write(f"Feels Like: {weather['feels_like']}°F")
