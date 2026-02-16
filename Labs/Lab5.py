@@ -2,13 +2,13 @@ import requests
 import streamlit as st
 
 def get_current_weather(location, api_key, units="imperial"):
-    location = st.input("Enter a location (City, State, Country):")
-    api_key = st.secrets["WEATHER_API_KEY"]
+    location = st.input("Enter a location (City, State, Country):") # Input for user to enter location
+    api_key = st.secrets["WEATHER_API_KEY"] # Get API key from secrets.toml file
     
     url = (
         f'https://api.openweathermap.org/data/2.5/weather'
         f'?q={location}&appid={api_key}&units={units}'
-    )
+    ) # Creates URL based on parameters
     
     response = requests.get(url)
     if response.status_code == 401:
