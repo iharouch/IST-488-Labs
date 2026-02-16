@@ -1,5 +1,4 @@
 import requests
-import streamlit as st
 
 def get_current_weather(location, api_key, units="imperial"):
     location = st.input("Enter a location (City, State, Country):") # Input for user to enter location
