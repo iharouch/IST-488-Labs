@@ -6,7 +6,7 @@ from openai import OpenAI
 SYSTEM_PROMPT = """
 Follow these steps STRICTLY:
 1. The user will provide a location (City, State, Country).
-2. If needed, call the weather tool and indicate in your response that you used it.
+2. If needed, call the weather tool.
 3. Provide a short summary of the weather information to the user.
 4. Provide clothing recommendations to the user based on the weather.
 5. Provide outdoor activities suggestions appropriate to the weather.
