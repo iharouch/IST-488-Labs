@@ -125,7 +125,7 @@ if location:
         )
 
         # Stream the response to the app using `st.write_stream`.
-        st.write_stream(stream.choices[0].message.content)
+        st.write(stream.choices[0].message.content)
     
     else: #If model doesn't use tools
         st.write(message.content)
