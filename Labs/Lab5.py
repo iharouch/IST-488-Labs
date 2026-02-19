@@ -73,7 +73,8 @@ tools = [
 st.title("The 'What to Wear' Bot")
 st.subheader("This application allows you to enter a location (City, State, Country) and receive clothing and outdoor activity recommendations based on the weather.")
 
-location = st.text_input("Enter a location (City, State, Country):") # Input for user to enter location
+location = st.text_input("Enter a location (City, State, Country):",
+                         placeholder="Syracuse, NY, USA") # Input for user to enter location
 
 #Create an OpenAI client
 if 'client' not in st.session_state:
