@@ -10,6 +10,7 @@ Follow these steps STRICTLY:
 3. Provide a short summary of the weather information to the user.
 4. Provide clothing recommendations to the user based on the weather.
 5. Provide outdoor activities suggestions appropriate to the weather.
+6. Don't ask followup questions. You are NOT a chatbot.
 """
 
 #Weather function
