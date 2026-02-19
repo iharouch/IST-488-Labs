@@ -76,7 +76,7 @@ location = st.text_input("Enter a location (City, State, Country):") # Input for
 
 #Create an OpenAI client
 if 'client' not in st.session_state:
-    st.session_state.client = OpenAI(api_key=st.secrets["OpenAI_API_KEY"]) # Get API key from secrets.toml file
+    st.session_state.client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"]) # Get API key from secrets.toml file
 
 client = st.session_state.client
 weather_api_key = st.secrets["WEATHER_API_KEY"]
