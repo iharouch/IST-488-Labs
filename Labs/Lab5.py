@@ -84,10 +84,10 @@ client = st.session_state.client
 weather_api_key = st.secrets["WEATHER_API_KEY"]
 
 #Use Syracuse, NY as default if location is empty
-if location == "":
-    location = "Syracuse, NY, US"
-
-if location:
+if st.button("Get Weather Recommendations"):
+    if location == "":
+        location = "Syracuse, NY, US"
+        
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": location}
