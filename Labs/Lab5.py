@@ -74,7 +74,7 @@ st.title("The 'What to Wear' Bot")
 st.markdown("This application allows you to enter a location (City, State, Country) and receive clothing and outdoor activity recommendations based on the weather.")
 
 location = st.text_input("Enter a location (City, State, Country):",
-                         placeholder="Syracuse, NY, USA") # Input for user to enter location
+                         placeholder="Syracuse, NY, US") # Input for user to enter location
 
 #Create an OpenAI client
 if 'client' not in st.session_state:
@@ -85,7 +85,7 @@ weather_api_key = st.secrets["WEATHER_API_KEY"]
 
 #Use Syracuse, NY as default if location is empty
 if location == "":
-    location = "Syracuse, NY, USA"
+    location = "Syracuse, NY, US"
 
 if location:
     messages = [
@@ -106,8 +106,8 @@ if location:
     if message.tool_calls:
         tool_call = message.tool_calls[0]
         arguments = json.loads(tool_call.function.arguments)
-        weather_data = get_current_weather(arguments.get("location", "Syracuse, NY, USA"), weather_api_key)
-    
+        weather_data = get_current_weather(arguments.get("location", "Syracuse, NY, US"), weather_api_key)
+
         # Include tool response in messages
         messages.append(message)
         messages.append({
@@ -117,7 +117,7 @@ if location:
         })
         messages.append({
             "role": "user",
-            "content": f"What's the weather like in {arguments.get('location', 'Syracuse, NY, USA')}?"
+            "content": f"What's the weather like in {arguments.get('location', 'Syracuse, NY, US')}?"
         })
 
         # Generate an answer using the OpenAI API.
