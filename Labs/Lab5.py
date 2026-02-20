@@ -84,10 +84,10 @@ client = st.session_state.client
 weather_api_key = st.secrets["WEATHER_API_KEY"]
 
 #Use Syracuse, NY as default if location is empty
-if st.button("Get Weather Recommendations"):
+if st.button("Get Weather Recommendations"): # Add button to generate answer
     if location == "":
         location = "Syracuse, NY, US"
-        
+
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": location}
@@ -97,7 +97,7 @@ if st.button("Get Weather Recommendations"):
         model = 'gpt-5-mini',
         messages = messages,
         tools = tools,
-        tool_choice='auto'
+        tool_choice='auto' # Let the model decide whether to use the tool
     )
 
     message = response.choices[0].message
@@ -126,7 +126,7 @@ if st.button("Get Weather Recommendations"):
             messages=messages
         )
 
-        # Stream the response to the app using `st.write_stream`.
+        # Print the response
         st.write(stream.choices[0].message.content)
     
     else: #If model doesn't use tools
