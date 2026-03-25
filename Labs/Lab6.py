@@ -7,14 +7,17 @@ if 'client' not in st.session_state:
     api_key = st.secrets["OPENAI_API_KEY"]
     st.session_state.client = OpenAI(api_key=api_key)
 
+#Add title and caption to app
 st.title("Responses API Chatbot")
 st.caption("This bot has web search enabled.")
 
-user_input = st.text_input("Ask me a question!")
+user_input = st.text_input("Ask me a question!") #User input
 client = st.session_state.client
 
+#Create sidebar with checkbox for structured mode
 structured_mode = st.sidebar.checkbox("Return structured summary")
 
+#Define the desired structure
 class ResearchSummary(BaseModel):
     main_answer: str
     key_facts: list[str]
@@ -22,12 +25,12 @@ class ResearchSummary(BaseModel):
 
 
 if user_input:
-    if structured_mode:
+    if structured_mode: #Use structured mode
         response = client.responses.parse(
             model="gpt-4.1",
-            instructions="You are a helpful research assistant. Cite your sources.",
+            instructions="You are a helpful research assistant. Cite your sources.", #Set persona
             input=user_input,
-            tools=[{"type": "web_search_preview"}],
+            tools=[{"type": "web_search_preview"}], #Have web search available
             text_format=ResearchSummary
         )
 
@@ -41,7 +44,7 @@ if user_input:
 
         st.caption(result.source_hint)
     
-    else:
+    else: #Use regular paragraph mode
         response = client.responses.create(
             model="gpt-4.1",
             instructions="You are a helpful research assistant. Cite your sources.",
