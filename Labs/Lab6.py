@@ -7,6 +7,7 @@ if 'client' not in st.session_state:
     st.session_state.client = OpenAI(api_key=api_key)
 
 st.title("Responses API Chatbot")
+st.caption("This bot has web search enabled.")
 
 prompt = st.text_input("Ask me a question!")
 client = st.session_state.client
@@ -14,8 +15,9 @@ client = st.session_state.client
 if prompt:
     response = client.responses.create(
         model="gpt-4.1",
-        instructions="You are a helpful teaching assistant for an R course.",
-        input=prompt
+        instructions="You are a helpful research assistant.",
+        input=prompt,
+        tools=[{"type": "web_search_preview"}]
     )
 
     st.write(response.output_text)
@@ -29,8 +31,9 @@ if prompt:
     if "last_response_id" in st.session_state and follow_up:
         follow_response = client.responses.create(
             model="gpt-4.1",
-            instructions="You are a helpful teaching assistant for an R course.",
+            instructions="You are a helpful research assistant.",
             input=follow_up,
+            tools=[{"type": "web_search_preview"}],
             previous_response_id=st.session_state.last_response_id
         )
 
