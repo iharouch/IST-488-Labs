@@ -3,7 +3,7 @@ openai
 chromadb
 pathlib
 PyMuPDF
-pysqlite3-binary
+#pysqlite3-binary
 protobuf==3.20
 requests
-base64
+pybase64
