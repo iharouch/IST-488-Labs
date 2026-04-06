@@ -29,9 +29,9 @@ if st.button("Generate Captions"):
                 {
                     "role": "user",
                     "content": [
-                        {"type": "image_url", "image_url": {"url": url, "detail": "auto"}},
-                        {"type": "text", "text":"Describe the image in at least 3 sentences. Write five different captions for this image."
-                         "Captions must vary in length, minimum one word but no longer than two sentences."
+                        {"type": "image_url", "image_url": {"url": image_url, "detail": "auto"}},
+                        {"type": "text", "text":"Describe the image in at least 3 sentences. Write five different captions for this image. "
+                         "Captions must vary in length, minimum one word but no longer than two sentences. "
                          "Captions should vary in tone, such as, but not limited to funny, intellectual, and aesthetic."}]
                          }]
         )
@@ -40,8 +40,9 @@ if st.button("Generate Captions"):
         st.warning("Please enter an image URL.")
 
 if st.session_state.url_response:
-    st.image(st.session_state.url_response)
-    st.write(st.session_state.url_response)
+    result = st.session_state.url_response.choices[0].message.content
+    st.write(result)
+    st.image(image_url)
 
 st.subheader("Image File Input")
 image_file = st.file_uploader("Upload an image file:", type=["jpg", "jpeg", "png", "webp", "gif"])
@@ -60,13 +61,14 @@ if st.button("Generate Captions for Uploaded Image"):
                     "role": "user",
                     "content": [
                         {"type": "image_url", "image_url": {"url": data_uri, "detail": "auto"}},
-                        {"type": "text", "text":"Describe the image in at least 3 sentences. Write five different captions for this image."
-                         "Captions must vary in length, minimum one word but no longer than two sentences."
+                        {"type": "text", "text":"Describe the image in at least 3 sentences. Write five different captions for this image. "
+                         "Captions must vary in length, minimum one word but no longer than two sentences. "
                          "Captions should vary in tone, such as, but not limited to funny, intellectual, and aesthetic."}]
                          }]
         )
         st.session_state.upload_response = upload_response
 
 if st.session_state.upload_response:
-    st.image(st.session_state.upload_response)
-    st.write(st.session_state.upload_response)
+    result = st.session_state.upload_response.choices[0].message.content
+    st.write(result)
+    st.image(image_file)
