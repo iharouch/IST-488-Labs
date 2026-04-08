@@ -23,7 +23,7 @@ image_url = st.text_input("Enter an image URL (the URL must lead directly to the
 if st.button("Generate Captions"):
     if image_url:
         url_response = st.session_state.client.chat.completions.create(
-            model="gpt-5.2",
+            model="gpt-4.2-mini",
             max_tokens=1024,
             messages=[
                 {
@@ -54,7 +54,7 @@ if st.button("Generate Captions for Uploaded Image"):
         data_uri = f"data:{mime};base64,{b64}"
 
         upload_response = st.session_state.client.chat.completions.create(
-            model="gpt-5.2",
+            model="gpt-4.2-mini",
             max_tokens=1024,
             messages=[
                 {
