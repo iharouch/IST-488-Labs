@@ -23,7 +23,7 @@ image_url = st.text_input("Enter an image URL (the URL must lead directly to the
 if st.button("Generate Captions"):
     if image_url:
         url_response = st.session_state.client.chat.completions.create(
-            model="gpt-4.1-mini",
+            model="gpt-5.2-chat-latest",
             max_tokens=1024,
             messages=[
                 {
