@@ -40,7 +40,6 @@ else:
 
 if st.sidebar.button("Clear Memories"):
     save_memories([])
-    st.session_state.messages = []
     st.rerun()
 
 system_prompt = "You are a helpful assistant."
