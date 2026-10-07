@@ -91,6 +91,7 @@ Keep responses focused, helpful, and easy to understand."""
 
 ### Main App ###
 st.title("Lab 4: Chatbot using RAG")
+st.markdown("This app uses a chatbot that can answer questions based on the syllabi of the Syracuse University courses in the RAG folder.")
 
 ### Querying A Collection -- Only used for testing ###
 #topic = st.sidebar.text_input("Topic", placeholder="Type your topic (e.g. GenAI)...")
