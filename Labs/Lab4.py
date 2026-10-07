@@ -1,13 +1,17 @@
+import sys
+
+# A fix for working with ChromaDB on Streamlit
+try:
+    __import__('pysqlite3')
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
+
 import streamlit as st
 from openai import OpenAI
-import sys
 import chromadb
 from pathlib import Path
 import fitz
-
-# A fix for working with ChromaDB on Streamlit
-__import__('pysqlite3')
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 #Create ChromaDB client and collection
 if 'Lab4_VectorDB' not in st.session_state:
